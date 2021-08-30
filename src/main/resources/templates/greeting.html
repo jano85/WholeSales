@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <script src="assets/js/jquery.min.js"></script>
+    <title>k</title>
+
+    <script>
+         function cargar(e) {
+               $.ajax({
+                    url : '/getdata',
+                    type : 'get',
+                    // data : $form.serialize(),
+                    success : function(response) {
+
+                        $("#ajaxLoadedContent").replaceWith(response);
+                    }
+                });
+
+        };
+
+
+    </script>
+</head>
+<body>
+<br/>
+
+adios
+<p th:text="'Adios '+${nombre}"></p>
+c
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<button onclick="cargar()">click</button>
+
+
+<div id="ajaxLoadedContent"></div>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+    <title>Wholesale</title>
+
+    <ui:include src="header.xhtml" ></ui:include>
+    <ui:include src="footScript.xhtml"/>
+    <link href="/assets/css/jquery.dataTables.min.css" rel="stylesheet"/>
+    <script src="/assets/js/jquery.dataTables.min.js"></script>
+    <script>
+        function cargarTable(){
+            $('#dataTable').DataTable({
+                ajax: '/datagrid',
+                method: 'post',
+                processing: true,
+                "serverSide": true,
+                "retrieve": true,
+
+                "aoColumns": [
+                    { "mData": "id" },
+                    { "mData": "name" }
+
+
+                ]
+            });
+        }
+    </script>
+</h:head>
+
+<h:body styleClass="bg-theme bg-theme1">
+
+<!-- Start wrapper-->
+<div id="wrapper">
+    <ui:include src="leftMenu.xhtml"/>
+    <ui:include src="UpperMenu.xhtml"/>
+    <div class="clearfix"></div>
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">Vertical Form</div>
+                            <h:panelGroup id="formulario">
+                            <h:form id="form_store"  >
+                                <div class="form-group">
+                                    <h:outputLabel  path="name">Name</h:outputLabel>
+                                    <h:inputText path="name" class="form-control" value="#{productBean.productoNew.nombre}"  placeholder="Enter Your Name"/>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel path="location">Location</h:outputLabel>
+                                    <h:inputText path="location" class="form-control" placeholder="Enter Your Email Address"/>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel path="address">Address</h:outputLabel>
+                                    <h:inputText path="address" class="form-control"  placeholder="Enter Your Mobile Number"/>
+                                </div>
+
+                                <div class="form-group">
+
+                            <h:commandButton  value="Detalle" styleClass="btn btn-light px-5" action="#{productBean.insert()}" >
+                                <i class="icon-lock"></i>
+                                <f:ajax execute="@form" render="panelGrilla formulario"   />
+                            </h:commandButton>
+                                </div>
+                            </h:form>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </div>
+
+                <h:panelGroup id="panelGrilla">
+                    <div class="card">
+                        <div class="card-header">Store
+                            <div class="card-action">
+                                <div class="dropdown">
+                                    <a href="#" class="dropdown-toggle dropdown-toggle-nocaret"
+                                       data-toggle="dropdown">
+                                        <i class="icon-options"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#">Export</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Separated link</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-flush table-borderless" id="dataTable">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                </tr>
+
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        /* <![CDATA[ */
+
+                        $(document).ready( function () {
+                            cargarTable();
+                        } );
+                        /* ]]> */
+                        </script>
+                </h:panelGroup>
+
+
+
+            </div><!--End Row-->
+
+            <!--End Dashboard Content-->
+
+            <!--start overlay-->
+            <div class="overlay toggle-menu"></div>
+            <!--end overlay-->
+
+        </div>
+        <!-- End container-fluid-->
+
+    </div><!--End content-wrapper-->
+
+
+    <!--Start footer-->
+
+    <ui:include src="footer.xhtml"/>
+
+    <!--End footer-->
+
+</div>
+
+
+
+
+
+
+
+
+</h:body>
+</html>
